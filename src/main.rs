@@ -106,6 +106,27 @@ async fn main() {
                 snake.body.len() as i32 + 1,
             );
 
+            // Cheatcode
+            if is_key_down(KeyCode::X) {
+                let delta_x = &snake.head.0 - &fruit.0;
+                let delta_y = &snake.head.1 - &fruit.1;
+
+                if delta_x.abs() > delta_y.abs() {
+                    println!("x > y");
+                    if delta_x > 0 {
+                        snake.dir = (-1, 0)
+                    } else if delta_x < 0 {
+                        snake.dir = (1, 0)
+                    }
+                } else {
+                    if delta_y > 0 {
+                        snake.dir = (0, -1)
+                    } else if delta_y < 0 {
+                        snake.dir = (0, 1)
+                    }
+                }
+            }
+
             // Don't allow movement that would result in colliding with yourself
             if is_key_down(KeyCode::Up) && snake.dir != down {
                 snake.dir = up;
